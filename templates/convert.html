@@ -1,0 +1,26 @@
+﻿{% extends "base.html" %}
+
+{% block body %}
+<style>
+    .display {
+        display: none;
+    }
+</style>
+<form action="{% url 'index' %}" method="POST" enctype="multipart/form-data">      
+    {% csrf_token %}
+    <p>Audio File : {{ form.WAV }}</p>
+    <p>Dictionary(.csv) : {{ form.dict }}</p>
+    <input name="convert" type="submit" value="Convert" onclick="btn()"/>
+</form>
+<div class="display" id="display">
+    {% load static %}
+    <img src="{% static "load.gif" %}">
+</div>
+<textarea name="text" rows="20" cols="80">{{text}}</textarea>
+<script>
+    var img = document.getElementById('display');
+    function btn() {
+        img.style.display = "block";
+    }
+</script>
+{% endblock %}
